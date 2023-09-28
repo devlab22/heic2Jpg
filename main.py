@@ -59,39 +59,30 @@ def main():
 
     try:
 
-        format = 'jpeg'
-        src = 'fotos'
-        target = 'converted'
-        save = False
-
         parser = argparse.ArgumentParser(
                         prog = 'imageConverter',
                         description='convert image from .heic',             
         )
 
-        parser.add_argument('-src', type=str, required=False)
-        parser.add_argument('-target', type=str, required=False)
-        parser.add_argument('-format', type=str, required=False)
+        parser.add_argument('-src', default='fotos', type=str, required=False)
+        parser.add_argument('-target', default='converted', type=str, required=False)
+        parser.add_argument('-format', default='jpeg', type=str, required=False)
         parser.add_argument('-save', action='store_true')
         args = parser.parse_args()
 
     #print(args)
-        if args.src:
-            src = args.src
-
-        if args.target:
-            target = args.target
-
-        if args.format:
-            format = args.format
-
-        if args.save:
-            save = bool(args.save)
+        
+        src = args.src
+        target = args.target
+        format = args.format
+        save = bool(args.save)
 
         print('src:', src)
         print('target:', target)
         print('format:', format)
         print('save:', save)   
+
+        #sys.exit(0)
 
         conv = Convert(src=src, target=target, format=format, save=save)
         conv.processData()
